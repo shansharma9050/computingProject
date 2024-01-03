@@ -1,0 +1,185 @@
+<html xmlns:th="//http:www.thymeleaf.org">
+<head>
+<title></title>
+
+</head>
+
+<body style="background-color: black;">
+	<fieldset>
+
+		<div style=" position:relative; left: 1420px;">
+			<input type="Button"
+				style="background-color: #FF69B4; border-radius: 4px; height: 30px; border: none; color: white;"
+				onclick="openAddfieldSet();" value="ADD CUSTOMERS">
+		</div>
+		<legend style="color: FFC0CB">REGISTRATION</legend>
+
+		<div th:if="${savingConformation}">
+
+			<div>
+				<div>
+					<p th:text="${savingConformation}" style="color: coral"></p>
+				</div>
+			</div>
+		</div>
+
+		<fieldset id="addFieldSet" style="display: none">
+			<legend style="color: #FFC0CB">Add Customers Details</legend>
+			<form action="/home/computing-project-save-data" method="get"
+				object="comp">
+				<div>
+					<table>
+						<tr>
+							<td><label style=" color: slategrey">FIRST NAME :</label></td>
+							<td><input type="text" id="roleId" name="firstName"
+								style="border-radius: 4px; background-color: #f1f1f1;"></td>
+						</tr>
+						<tr>
+							<td><label style=" color: slategrey">LAST NAME :</label></td>
+							<td><input type="text" id="nameId" name="lastName"
+								style="border-radius: 4px; background-color: #f1f1f1;"></td>
+						</tr>
+						<tr>
+							<td><label style=" color: slategrey">EMAIL :</label></td>
+							<td><input type="text" id="emailId" name="email"
+								style="border-radius: 4px; background-color: #f1f1f1;"></td>
+						</tr>
+						<tr>
+							<td><label style=" color: slategrey">PH. NO. :</label></td>
+							<td><input type="text" id="phoneNumberId" name="phNumber"
+								style="border-radius: 4px; background-color: #f1f1f1;">
+							</td>
+						</tr>
+						<tr>
+							<td><label style=" color: slategrey">DOB :</label></td>
+							<td><input type="date" id="dobId" name="dob"
+								style="border-radius: 4px; background-color: #f1f1f1;"></td>
+						</tr>
+						<tr>
+							<td><a th:href="@{/logout}">LOGOUT</a></td>
+							<td><input type="submit" id="subId"
+								style="background-color: #555555;  border-radius: 4px; color: white;"
+								value="Submit"> <input type="reset" id="canId"
+								onclick="openAdd();"
+								style="color: slategrey; background-color: #e7e7e7;  border-radius: 4px;"
+								value="Cancel"></td>
+						</tr>
+					</table>
+				</div>
+
+			</form>
+		</fieldset>
+		<fieldset id="editFieldSet" style="display: none">
+			<legend style="color: #FFC0CB">Edit Customers Details</legend>
+			<form action="/home/computing-project-save-data" method="get"
+				object="comp">
+				<div>
+					<table>
+						<tr>
+							<td><label style=" color: slategrey">FIRST NAME :</label></td>
+							<td><input type="text" id="editRoleId" name="firstName"
+								style="border-radius: 4px; background-color: #f1f1f1;"></td>
+						</tr>
+						<tr>
+							<td><label style=" color: slategrey" >LAST NAME :</label></td>
+							<td><input type="text" id="editnameId" name="lastName"
+								style="border-radius: 4px; background-color: #f1f1f1;"></td>
+						</tr>
+						<tr>
+							<td><label style=" color: slategrey">EMAIL :</label></td>
+							<td><input type="text" id="editemailId" name="email"
+								style="border-radius: 4px; background-color: #f1f1f1;"></td>
+						</tr>
+						<tr>
+							<td><label style=" color: slategrey">PH. NO. :</label></td>
+							<td><input type="text" id="editphoneNumberId" name="phNumber"
+								style="border-radius: 4px; background-color: #f1f1f1;">
+							</td>
+						</tr>
+						<tr>
+							<td><label style=" color: slategrey">DOB :</label></td>
+							<td><input type="date" id="editdobId" name="dob"
+								style="border-radius: 4px; background-color: #f1f1f1;"></td>
+						</tr>
+						<tr>
+							<td><a th:href="@{/logout}">LOGOUT</a></td>
+							<td><input type="submit" id="subId"
+								style="background-color: #555555; border-radius: 4px; color: white;"
+								value="Submit"> <input type="reset" id="canId"
+								onclick="openAdd();"
+								style="color: slategrey; background-color: #e7e7e7;  border-radius: 4px;"
+								value="Cancel"></td>
+						</tr>
+					</table>
+				</div>
+
+			</form>
+		</fieldset>
+		<fieldset>
+			<legend style="color: #FFC0CB">CUSTOMER DETAILS</legend>
+			<table style="border: 1px solid; color: slategrey">
+				<colgroup>
+					<col width="3%">
+					<col width="18%">
+					<col width="18%">
+					<col width="22%">
+					<col width="20%">
+					<col width="20%">
+					<col width="20%">
+				</colgroup>
+				<thead>
+					<tr style="border: 1px solid; color: white">
+						<th style="border-left: 1px solid">S.NO</th>
+						<th style="border-left: 1px solid">FIRST NAME</th>
+						<th style="border-left: 1px solid">LAST NAME</th>
+						<th style="border-left: 1px solid">EMAIL</th>
+						<th style="border-left: 1px solid">PHONE NUMBER</th>
+						<th style="border-left: 1px solid">DATE OF BIRTH</th>
+						<th style="border-left: 1px solid">ACTION</th>
+					</tr>
+				</thead>
+				<tbody style="border: 1px solid">
+					<tr th:each="data,isCount :${com}">
+						<td style="border: 1px solid"><span
+							th:text="${isCount.count}"></span></td>
+						<td style="border: 1px solid"><span
+							th:if="${data.firstName ==null}">--</span> <span
+							th:if="${data.firstName !=null}" th:text="${data.firstName}"></span></td>
+						<td style="border: 1px solid"><span
+							th:if="${data.lastName ==null}">--</span> <span
+							th:if="${data.lastName}" th:text="${data.lastName}"></span></td>
+						<td style="border: 1px solid"><span
+							th:if="${data.email==null}">--</span> <span
+							th:if="${data.email !=null}" th:text="${data.email}"></span></td>
+
+						<td style="border: 1px solid"><span
+							th:if="${data.phNumber ==null}">--</span> <span
+							th:if="${data.phNumber!=null}" th:text="${data.phNumber}"></span>
+						</td>
+						<td style="border: 1px solid"><span
+							th:if="${data.dob1 ==null}">--</span> <span
+							th:if="${data.dob1!=null}" th:text="${#calendars.format(data.dob1,'dd/MM/yyyy')}"></span></td>
+						<td>
+							<button type="button" style="background-color: #BC8F8F;" class="grey-btn" onclick="openEditfieldSet();editData(this.value);"
+								th:value="${data.id}">
+								<i class="fa fa-edit fa-2x" title="Click to Edit"></i>
+							</button>
+						</td>
+						<td>
+							<button type="button" style="background-color: #BC8F8F;"class="grey-btn" onclick=""
+								th:value="${data.id}">
+								<i class="fa fa-trash fa-2x" title="Click to Delete"></i>
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</fieldset>
+	</fieldset>
+</body>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="/JS/ComputingProject.js"></script>
+</html>

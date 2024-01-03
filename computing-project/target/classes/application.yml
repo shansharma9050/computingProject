@@ -1,0 +1,21 @@
+api:
+ url: http://localhost:8443
+ 
+server:
+ port: 9099
+ 
+spring:
+  application:
+   name : COMPUTING-PROJECT
+  
+#eureka configuration  
+eureka:
+ instance:
+    prefer-ip-address: true
+ client:
+  fetch-registry: true
+  register-with-eureka: true
+  service-url:
+   defaultZone: http://localhost:8761/eureka
+   
+   
