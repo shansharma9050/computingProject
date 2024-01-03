@@ -1,0 +1,184 @@
+<html xmlns:th="//http:www.thymeleaf.org">
+<head>
+<title>
+</title>
+
+</head>
+
+<body style="background-color: #92a8d1;">
+	<fieldset>
+		<legend>REGISTRATION</legend>
+		
+		 <input type="Button" style="background-color:blue; border: none;color: white;" onclick="openAddfieldSet();" value="Add Role"> 
+		<div th:if="${savingConformation}">
+
+								<div >
+									<div>
+										<a href="#" class="close" data-dismiss="alert"
+											aria-label="close">&times;</a>
+										<p th:text="${savingConformation}" style="color: coral"></p>
+									</div>
+								</div>
+							</div>
+		
+	
+		<fieldset id="addFieldSet" style="display: none">
+		<form action="/home/submit-all-details-of-user" method="post"
+			object="dataComputingModel">
+			<div>
+				<table> 
+					<tr>
+						<td><label>ROLE :</label></td>
+						<td><input type="text" id="roleId" name="title" style=" border-radius: 4px;background-color: #f1f1f1;"></td>
+					</tr>
+					<tr>
+						<td><label>NAME :</label></td>
+						<td><input type="text" id="nameId" name="name" style=" border-radius: 4px;background-color: #f1f1f1;"></td>
+					</tr>
+					<tr>
+						<td><label>LAST NAME :</label></td>
+						<td><input type="text" id="lastNameId" name="description" style=" border-radius: 4px;background-color: #f1f1f1;">
+						</td>
+					</tr>
+					<tr>
+						<td><label>EMAIL :</label></td>
+						<td><input type="text" id="emailId" name="email" style=" border-radius: 4px;background-color: #f1f1f1;"></td>
+					</tr>
+					<tr>
+						<td><label>PH. NO. :</label></td>
+						<td><input type="text" id="phoneNumberId" name="phNumber" style=" border-radius: 4px;background-color: #f1f1f1;">
+						</td>
+					</tr>
+					<tr>
+						<td><label>DOB :</label></td>
+						<td><input type="date" id="dobId" name="dob" style=" border-radius: 4px;background-color: #f1f1f1;"></td>
+					</tr>
+					<tr>
+					<td><a th:href="@{/logout}">LOGOUT</a></td>
+						<td><input type="submit" id="subId"
+							style="background-color:#555555; border: none;color: white;" value="Submit"> <input
+							type="reset" id="canId"  onclick="openAdd();"style="color: slategrey;background-color: #e7e7e7;  border: none;" value="Cancel">
+						</td>
+					</tr>
+				</table>
+			</div>
+			
+		</form>
+		</fieldset>
+		<fieldset>
+			<legend>ROLE DETAILS</legend>
+			<table style="border: 1px solid; color: white">
+			<colgroup>
+						<col width="3%">
+						<col width="20%">
+						<col width="20%">
+						<col width="20%">
+						<col width="22%">
+						<col width="20%">
+						<col width="20%">
+						<col width="20%">
+					</colgroup>
+				<thead>
+					<tr style="border: 1px solid; color: black">
+						<th style="border: 1px solid">S.NO</th>
+						<th style="border: 1px solid">NAME</th>
+						<th style="border: 1px solid">LAST NAME</th>
+						<th style="border: 1px solid">ROLE</th>
+						<th style="border: 1px solid">EMAIL</th>
+						<th style="border: 1px solid">PHONE NUMBER</th>
+						<th style="border: 1px solid">DATE OF BIRTH</th>
+					</tr>
+				</thead>
+				<tbody style="border: 1px solid">
+					<tr th:each="data,isCount :${dataComputingModelList}">
+						<td style="border: 1px solid"><span
+							th:text="${isCount.count}"></span></td>
+						<td style="border: 1px solid"><span
+							th:if="${data.name ==null}">--</span> <span
+							th:if="${data.name !=null}" th:text="${data.name}"></span></td>
+						<td style="border: 1px solid"><span
+							th:if="${data.description ==null}">--</span> <span
+							th:if="${data.description!=null}" th:text="${data.description}"></span>
+						</td>
+						<td style="border: 1px solid"><span
+							th:if="${data.title==null}">--</span> <span
+							th:if="${data.title !=null}" th:text="${data.title}"></span></td>
+						<td style="border: 1px solid"><span
+							th:if="${data.email ==null}">--</span> <span
+							th:if="${data.email!=null}" th:text="${data.email}"></span></td>
+						<td style="border: 1px solid"><span
+							th:if="${data.phNumber ==null}">--</span> <span
+							th:if="${data.phNumber!=null}" th:text="${data.phNumber}"></span>
+						</td>
+						<td style="border: 1px solid"><span
+							th:if="${data.dob ==null}">--</span> <span
+							th:if="${data.dob!=null}" th:text="${data.dob}"></span></td>
+					</tr>
+				</tbody>
+			</table>
+		</fieldset>
+		<fieldset>
+			<legend style="color: #FFC0CB">CUSTOMER DETAILS</legend>
+			<table style="border: 1px solid; color: slategrey">
+				<colgroup>
+					<col width="3%">
+					<col width="18%">
+					<col width="18%">
+					<col width="22%">
+					<col width="20%">
+					<col width="20%">
+					<col width="20%">
+				</colgroup>
+				<thead>
+					<tr style="border: 1px solid; color: white">
+						<th style="border-left: 1px solid">S.NO</th>
+						<th style="border-left: 1px solid">FIRST NAME</th>
+						<th style="border-left: 1px solid">LAST NAME</th>
+						<th style="border-left: 1px solid">EMAIL</th>
+						<th style="border-left: 1px solid">PHONE NUMBER</th>
+						<th style="border-left: 1px solid">DATE OF BIRTH</th>
+						<th style="border-left: 1px solid">ACTION</th>
+					</tr>
+				</thead>
+				<tbody style="border: 1px solid">
+					<tr th:each="data,isCount :${com}">
+						<td style="border: 1px solid"><span
+							th:text="${isCount.count}"></span></td>
+						<td style="border: 1px solid"><span
+							th:if="${data.firstName ==null}">--</span> <span
+							th:if="${data.firstName !=null}" th:text="${data.firstName}"></span></td>
+						<td style="border: 1px solid"><span
+							th:if="${data.lastName ==null}">--</span> <span
+							th:if="${data.lastName}" th:text="${data.lastName}"></span></td>
+						<td style="border: 1px solid"><span
+							th:if="${data.email==null}">--</span> <span
+							th:if="${data.email !=null}" th:text="${data.email}"></span></td>
+
+						<td style="border: 1px solid"><span
+							th:if="${data.phNumber ==null}">--</span> <span
+							th:if="${data.phNumber!=null}" th:text="${data.phNumber}"></span>
+						</td>
+						<td style="border: 1px solid"><span
+							th:if="${data.dob1 ==null}">--</span> <span
+							th:if="${data.dob1!=null}" th:text="${#calendars.format(data.dob1,'dd/MM/yyyy')}"></span></td>
+						<td>
+							<button type="button" style="background-color: #BC8F8F;" class="grey-btn" onclick="openEditfieldSet();editData(this.value);"
+								th:value="${data.id}">
+								<i class="fa fa-edit fa-2x" title="Click to Edit"></i>
+							</button>
+						</td>
+						<td>
+							<button type="button" style="background-color: #BC8F8F;"class="grey-btn" onclick=""
+								th:value="${data.id}">
+								<i class="fa fa-trash fa-2x" title="Click to Delete"></i>
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</fieldset>
+	</fieldset>
+</body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="/JS/DataComputing.js"></script>
+</html>
