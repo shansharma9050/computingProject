@@ -1,0 +1,45 @@
+server:
+  port: 8443
+  
+spring:
+ application:
+   name: api-gatway
+   
+ cloud:
+  gateway:
+   routes:
+    - id: COMPUTING-PROJECT
+      uri: lb://COMPUTING-PROJECT
+      predicates:
+        - Path=/myHome/**
+            
+    - id: TRAVLEX
+      uri: lb://TRAVLEX
+      predicates:
+        - Path=/homes/**
+        
+    - id: DATACOMPUTING
+      uri: lb://DATACOMPUTING
+      predicates:
+        - Path=/yourHomes/**
+   
+ 
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+      
+    
+ #okta configuration 
+okta:
+ oauth2:
+  issuer: https://dev-16289374.okta.com/oauth2/default
+  audience: api://default
+  client-id: 0oaax4ukub6eB3gzj5d7
+  client-secret: w8pKoEAbqWYFZAeM1t_S_N5RU0ZD2IC1eIMnzrEZZZuHGW3xgThHpqesdKYRZL6U
+  scopes: openid, profile, email, offline_access
+    
